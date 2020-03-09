@@ -1,0 +1,1 @@
+call install-templates.bat tcm:6-344931-2

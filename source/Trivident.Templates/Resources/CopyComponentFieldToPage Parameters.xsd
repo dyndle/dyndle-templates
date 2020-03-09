@@ -1,0 +1,43 @@
+﻿<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="DD4T.Templates.Schemas.DynamicDeliveryParameters" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="DD4T.Templates.Schemas.DynamicDeliveryParameters">
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="ComponentFieldName" Metadata="false">Name of the component field to copy from</tcm:Label>
+        <tcm:Label ElementName="PageFieldName" Metadata="false">Name of the page field to copy to</tcm:Label>
+        <tcm:Label ElementName="FirstCpOnly" Metadata="false">Only look at first component on the page?</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="cm_xml_inst.xsd"></xsd:import>
+  <xsd:element name="Parameters">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ComponentFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="PageFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="FirstCpOnly" minOccurs="1" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <ExtensionXml xmlns="http://www.tridion.com/ContentManager/5.0"></ExtensionXml>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">radio</tcm:listtype>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="true"></xsd:enumeration>
+              <xsd:enumeration value="false"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

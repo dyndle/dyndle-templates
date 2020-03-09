@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<templateAssemblyUploadConfig>
+  <targetURL>http://cmdev.ihsmarkit.info.corp</targetURL>
+  <userName>IHSMPUB\Quirijn.Slings</userName>
+  <password>68kWdEXQtk4lIjXF3ojjrA==</password>
+  <uploadPDB>false</uploadPDB>
+</templateAssemblyUploadConfig>

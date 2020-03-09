@@ -1,0 +1,9 @@
+# Build worker image (VM template)
+image: Visual Studio 2017
+before_build:
+  - nuget restore source
+build_script:
+  - choco install "msbuild-sonarqube-runner" -y
+  - MSBuild.SonarQube.Runner.exe begin /k:"trivident-templates" /d:"sonar.host.url=https://sonarcloud.io" /d:"sonar.login=bed120c8ac17428242f7ba339b7ffbae9022ba8a" /d:"sonar.organization=trivident" 
+  - msbuild "source\Trivident.Templates.sln"
+  - MSBuild.SonarQube.Runner.exe end /d:"sonar.login=bed120c8ac17428242f7ba339b7ffbae9022ba8a"

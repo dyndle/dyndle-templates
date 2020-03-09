@@ -1,0 +1,79 @@
+﻿<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="DD4T.Templates.Schemas.DynamicDeliveryParameters" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="DD4T.Templates.Schemas.DynamicDeliveryParameters">
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="BaseUrl" Metadata="false">URL of the root of the web site</tcm:Label>
+        <tcm:Label ElementName="SitemapComponentTitle" Metadata="false">Title of the Sitemap component which will be placed on the page</tcm:Label>
+        <tcm:Label ElementName="SitemapSchemaTitle" Metadata="false">Title of the Sitemap schema</tcm:Label>
+        <tcm:Label ElementName="SitemapRootElementName" Metadata="false">Root element name of the Sitemap schema</tcm:Label>
+        <tcm:Label ElementName="SitemapComponentTemplateTitle" Metadata="false">Title of the Sitemap component template to be used on the page</tcm:Label>
+        <tcm:Label ElementName="SitemapComponentViewName" Metadata="false">Name of the Sitemap component view associated with the component template</tcm:Label>
+        <tcm:Label ElementName="RegexPrefix" Metadata="false">Regular expression to use to determine prefix</tcm:Label>
+        <tcm:Label ElementName="LinkLevels" Metadata="false">Maximum number of levels to follow links in structure group metadata</tcm:Label>
+        <tcm:Label ElementName="CompressionEnabled" Metadata="false">Compress output</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="cm_xml_inst.xsd"></xsd:import>
+  <xsd:element name="Parameters">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="BaseUrl" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="RegexPrefix" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SitemapComponentTitle" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SitemapSchemaTitle" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SitemapRootElementName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SitemapComponentTemplateTitle" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="SitemapComponentViewName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LinkLevels" minOccurs="0" maxOccurs="1" type="xsd:decimal">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CompressionEnabled" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="yes"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>

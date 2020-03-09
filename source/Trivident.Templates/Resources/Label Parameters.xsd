@@ -1,0 +1,83 @@
+﻿<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="DD4T.Templates.Schemas.DynamicDeliveryParameters" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="DD4T.Templates.Schemas.DynamicDeliveryParameters">
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="Prefix" Metadata="false">Prefix added to key (only if you want to override the default)</tcm:Label>
+        <tcm:Label ElementName="LabelGroupSchemaTitle" Metadata="false">Name of the label group schema</tcm:Label>
+        <tcm:Label ElementName="LabelGroupRootElementName" Metadata="false">Root element name of the label group schema</tcm:Label>
+        <tcm:Label ElementName="LabelGroupGroupFieldName" Metadata="false">Name of the field that contains the label group name (leave empty if there is no such field)</tcm:Label>
+        <tcm:Label ElementName="LabelGroupGroupFieldValue" Metadata="false">Name of the value to use as the label group name (leave empty if there is no such field)</tcm:Label>
+        <tcm:Label ElementName="LabelFieldName" Metadata="false">Name of the field that contains the embeddable label</tcm:Label>
+        <tcm:Label ElementName="LabelRootElementName" Metadata="false">Root element name of the embeddable label schema</tcm:Label>
+        <tcm:Label ElementName="KeyFieldName" Metadata="false">Name of the field that contains the label key</tcm:Label>
+        <tcm:Label ElementName="ValueFieldName" Metadata="false">Name of the field that contains the label value</tcm:Label>
+        <tcm:Label ElementName="CompressionEnabled" Metadata="false">Compress output</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="cm_xml_inst.xsd"></xsd:import>
+  <xsd:element name="Parameters">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="Prefix" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo />
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LabelGroupSchemaTitle" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LabelGroupRootElementName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LabelGroupGroupFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LabelGroupGroupFieldValue" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LabelFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LabelRootElementName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="KeyFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ValueFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="CompressionEnabled" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="yes"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
