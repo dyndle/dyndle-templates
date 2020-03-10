@@ -95,7 +95,7 @@
   <ItemGroup>
     <Compile Include="CategoryTitleToIdLabelMapping.cs" />
     <Compile Include="PublicationMetadataLabelMapping.cs" />
-    <Compile Include="SetLinkLevels.cs" />
+    <Compile Include="BoostLinkLevel.cs" />
     <Compile Include="ReplaceCharacter.cs" />
     <Compile Include="CopyComponentFieldToPage.cs" />
     <Compile Include="AddComponentsInFolder.cs" />
