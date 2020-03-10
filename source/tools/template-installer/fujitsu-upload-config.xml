@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<templateAssemblyUploadConfig>
-  <targetURL>http://dev-cm.fujitsu.com</targetURL>
-  <userName>.\Administrator</userName>
-  <password>e3FkPdi42HWmwNl2psiPyA==</password>
-  <uploadPDB>false</uploadPDB>
-</templateAssemblyUploadConfig>

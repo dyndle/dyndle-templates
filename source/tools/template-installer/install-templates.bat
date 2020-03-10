@@ -41,7 +41,7 @@ echo Enter the URI of the folder where you want to store the template building b
 set /p "TARGET_FOLDER= "
 :AfterAskFolder
 
-TcmUploadAssembly.exe upload-config.xml "files\Trivident.Templates.merged.dll" /folder:%TARGET_FOLDER% /verbose
+TcmUploadAssembly.exe upload-config.xml "files\Dyndle.Templates.merged.dll" /folder:%TARGET_FOLDER% /verbose
 
 if %REMOVE_CONFIG%==y (
 	echo Removing config file
