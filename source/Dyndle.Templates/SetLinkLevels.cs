@@ -5,7 +5,7 @@ using Tridion.ContentManager.Templating.Assembly;
 namespace Dyndle.Templates
 {
     /// <summary>
-    /// Set the LinkLevels value 
+    /// Override the LinkLevel set in the Generate Dynamic Page / CP TBB
     /// </summary>
     [TcmTemplateTitle("Boost LinkLevel")]
     [TcmTemplateParameterSchema("resource:Dyndle.Templates.Resources.BoostLinkLevel.xsd")]
