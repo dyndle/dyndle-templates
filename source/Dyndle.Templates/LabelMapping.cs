@@ -14,9 +14,6 @@ namespace Dyndle.Templates
     public class LabelMapping : LabelMappingAbstract
     {
         private readonly TemplatingLogger LOG = TemplatingLogger.GetLogger(typeof(LabelMapping));
-        private static readonly string DefaultCurrentLabelValueFieldName = "value";
-
-
 
         public override IDictionary<string, string> GetMappings(Repository repository)
         {
@@ -126,7 +123,7 @@ namespace Dyndle.Templates
             // ---- CurrentLabelValueFieldName (defaults to "value")
             // ---- CurrentLabelKeyFieldName (if empty, the key is assumed to be the title of the component)
             // ---- CurrentEmbeddedLabelsFieldName (if it has a value, the embedded fields are assumed to have a key/value pair)
-            // This allows 4 different scenarios:
+            // This allows 5 different scenarios:
             // 1. Label components have text fields which are used as value (with the field name as the key)
             // 2. Label components have only a value text field, the component title is the key
             // 3. Label components have a key and a value text field

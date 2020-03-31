@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<templateAssemblyUploadConfig>
+  <targetURL>http://live.machine</targetURL>
+  <userName>.\Administrator</userName>
+  <password>e3FkPdi42HWmwNl2psiPyA==</password>
+  <uploadPDB>false</uploadPDB>
+</templateAssemblyUploadConfig>
