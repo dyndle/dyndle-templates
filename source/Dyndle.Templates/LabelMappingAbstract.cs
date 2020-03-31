@@ -41,17 +41,17 @@ namespace Dyndle.Templates
             dd4tComponent.Schema = new DD4T.ContentModel.Schema() { RootElementName = LabelGroupRootElementName, Title = LabelGroupSchemaTitle, Id = "tcm:0-0-0" };
             dd4tComponent.ComponentType = Dynamic.ComponentType.Normal;
 
-            if (! (string.IsNullOrEmpty(LabelGroupGroupFieldName) || string.IsNullOrEmpty(LabelGroupGroupFieldValue)))
-            {
-                Dynamic.Field groupField = new Dynamic.Field()
-                {
-                    Name = LabelGroupGroupFieldName,
-                    Values = new List<string>() { LabelGroupGroupFieldValue },
-                    XPath = "/",
-                    FieldType = Dynamic.FieldType.Text
-                };
-                dd4tComponent.Fields.Add(LabelGroupGroupFieldName, groupField);
-            }
+            //if (! (string.IsNullOrEmpty(LabelGroupGroupFieldName) || string.IsNullOrEmpty(LabelGroupGroupFieldValue)))
+            //{
+            //    Dynamic.Field groupField = new Dynamic.Field()
+            //    {
+            //        Name = LabelGroupGroupFieldName,
+            //        Values = new List<string>() { LabelGroupGroupFieldValue },
+            //        XPath = "/",
+            //        FieldType = Dynamic.FieldType.Text
+            //    };
+            //    dd4tComponent.Fields.Add(LabelGroupGroupFieldName, groupField);
+            //}
             dd4tPage.ComponentPresentations.Add(
                 new DD4T.ContentModel.ComponentPresentation()
                 {
@@ -128,149 +128,19 @@ namespace Dyndle.Templates
         }
 
 
-        protected string Prefix
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return DefaultPrefix;
-                }
-                if (Package.GetByName("Prefix") == null)
-                {
-                    return DefaultPrefix;
-                }
-                return Package.GetByName("Prefix").GetAsString();
-            }
-        }
+        protected string Prefix => DefaultPrefix;
 
-        private string LabelFieldName
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return "LabelFieldNamePackageNull";
-                }
-                if (Package.GetByName("LabelFieldName") == null)
-                {
-                    return "LabelFieldNameNotFound";
-                }
-                return Package.GetByName("LabelFieldName").GetAsString();
-            }
-        }
+        private string LabelFieldName => "settings";
 
-        private string KeyFieldName
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return "KeyFieldNamePackageNull";
-                }
-                if (Package.GetByName("KeyFieldName") == null)
-                {
-                    return "KeyFieldNameNotFound";
-                }
-                return Package.GetByName("KeyFieldName").GetAsString();
-            }
-        }
+        private string KeyFieldName => "key";
 
-        private string ValueFieldName
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return "ValueFieldNamePackageNull";
-                }
-                if (Package.GetByName("ValueFieldName") == null)
-                {
-                    return "ValueFieldNameNotFound";
-                }
-                return Package.GetByName("ValueFieldName").GetAsString();
-            }
-        }
+        private string ValueFieldName => "value";
 
-        private string LabelRootElementName
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return "LabelRootElementNamePackageNull";
-                }
-                if (Package.GetByName("LabelRootElementName") == null)
-                {
-                    return "LabelRootElementNameNotFound";
-                }
-                return Package.GetByName("LabelRootElementName").GetAsString();
-            }
-        }
+        private string LabelRootElementName => "key-value";
 
+        private string LabelGroupSchemaTitle => "System Settings";
 
-        private string LabelGroupSchemaTitle
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return "LabelGroupSchemaTitlePackageNull";
-                }
-                if (Package.GetByName("LabelGroupSchemaTitle") == null)
-                {
-                    return "LabelGroupSchemaTitleNotFound";
-                }
-                return Package.GetByName("LabelGroupSchemaTitle").GetAsString();
-            }
-        }
-
-        private string LabelGroupRootElementName
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return "LabelGroupRootElementNamePackageNull";
-                }
-                if (Package.GetByName("LabelGroupRootElementName") == null)
-                {
-                    return "LabelGroupRootElementNameNotFound";
-                }
-                return Package.GetByName("LabelGroupRootElementName").GetAsString();
-            }
-        }
-
-        private string LabelGroupGroupFieldName
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return string.Empty;
-                }
-                if (Package.GetByName("LabelGroupGroupFieldName") == null)
-                {
-                    return string.Empty;
-                }
-                return Package.GetByName("LabelGroupGroupFieldName").GetAsString();
-            }
-        }
-
-        private string LabelGroupGroupFieldValue
-        {
-            get
-            {
-                if (Package == null)
-                {
-                    return string.Empty;
-                }
-                if (Package.GetByName("LabelGroupGroupFieldValue") == null)
-                {
-                    return string.Empty;
-                }
-                return Package.GetByName("LabelGroupGroupFieldValue").GetAsString();
-            }
-        }
+        private string LabelGroupRootElementName => "system-settings";
+     
     }
 }

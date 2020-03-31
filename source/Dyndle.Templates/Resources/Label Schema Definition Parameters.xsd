@@ -3,14 +3,14 @@
     <xsd:appinfo>
       <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
         <tcm:Label ElementName="Prefix" Metadata="false">Prefix added to key (defaults to Label)</tcm:Label>
-        <tcm:Label ElementName="LabelGroupSchemaTitle" Metadata="false">Name of the label group schema</tcm:Label>
-        <tcm:Label ElementName="LabelGroupRootElementName" Metadata="false">Root element name of the label group schema</tcm:Label>
-        <tcm:Label ElementName="SchemaWebDavUrl" Metadata="false">WebDav Url location of the Label Schema</tcm:Label>
-        <tcm:Label ElementName="FolderWebDavUrl" Metadata="false">WebDav Url location of the folder that contains the labels (if empty, the whole publication is searched)</tcm:Label>
-        <tcm:Label ElementName="LabelFieldName" Metadata="false">Name of the OUTPUT field that contains the embeddable label</tcm:Label>
+        <!--<tcm:Label ElementName="LabelGroupSchemaTitle" Metadata="false">Name of the label group schema</tcm:Label>
+        <tcm:Label ElementName="LabelGroupRootElementName" Metadata="false">Root element name of the label group schema</tcm:Label>-->
+        <tcm:Label ElementName="SchemaWebDavUrl" Metadata="false">Uri or WebDav Url of the label Schema</tcm:Label>
+        <tcm:Label ElementName="FolderWebDavUrl" Metadata="false">Uri or WebDav Url of the folder that contains the labels (if empty, the whole publication is searched)</tcm:Label>
+        <!--<tcm:Label ElementName="LabelFieldName" Metadata="false">Name of the OUTPUT field that contains the embeddable label</tcm:Label>
         <tcm:Label ElementName="LabelRootElementName" Metadata="false">Root element name of the embeddable label schema</tcm:Label>
         <tcm:Label ElementName="KeyFieldName" Metadata="false">Name of the OUTPUT field that contains the label key</tcm:Label>
-        <tcm:Label ElementName="ValueFieldName" Metadata="false">Name of the OUTPUT field that contains the label value</tcm:Label>
+        <tcm:Label ElementName="ValueFieldName" Metadata="false">Name of the OUTPUT field that contains the label value</tcm:Label>-->
         <tcm:Label ElementName="CurrentLabelKeyFieldName" Metadata="false">Name of the INPUT field that contains the label key</tcm:Label>
         <tcm:Label ElementName="CurrentLabelValueFieldName" Metadata="false">Name of the INPUT field that contains the label value</tcm:Label>
         <tcm:Label ElementName="CurrentEmbeddedLabelsFieldName" Metadata="false">Name of the INPUT field that contains embedded labels</tcm:Label>
@@ -27,7 +27,7 @@
             <xsd:appinfo />
           </xsd:annotation>
         </xsd:element>
-        <xsd:element name="LabelGroupSchemaTitle" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+        <!--<xsd:element name="LabelGroupSchemaTitle" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
           <xsd:annotation>
             <xsd:appinfo/>
           </xsd:annotation>
@@ -36,7 +36,7 @@
           <xsd:annotation>
             <xsd:appinfo/>
           </xsd:annotation>
-        </xsd:element>
+        </xsd:element>-->
         <xsd:element name="SchemaWebDavUrl" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
           <xsd:annotation>
             <xsd:appinfo />
@@ -47,7 +47,7 @@
             <xsd:appinfo />
           </xsd:annotation>
         </xsd:element>        
-        <xsd:element name="LabelFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+        <!--<xsd:element name="LabelFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
           <xsd:annotation>
             <xsd:appinfo />
           </xsd:annotation>
@@ -66,7 +66,7 @@
           <xsd:annotation>
             <xsd:appinfo />
           </xsd:annotation>
-        </xsd:element>
+        </xsd:element>-->
         <xsd:element name="CurrentLabelKeyFieldName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
           <xsd:annotation>
             <xsd:appinfo />
