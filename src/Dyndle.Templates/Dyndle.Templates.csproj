@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryTitleToIdLabelMapping.cs" />
+    <Compile Include="PreviewPage.cs" />
     <Compile Include="PublicationMetadataLabelMapping.cs" />
     <Compile Include="ReplaceCharacter.cs" />
     <Compile Include="CopyComponentFieldToPage.cs" />
@@ -154,6 +155,9 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\Preview Parameters.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
