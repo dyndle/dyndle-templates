@@ -12,47 +12,36 @@ using Tridion.ContentManager.Templating.Assembly;
 
 namespace Dyndle.Templates
 {
+    /// <summary>
+    /// Use this template building block to replace any special character from an entire publication.
+    /// provide parameter as (replace1=replaceby1)(replace2=replaceby2)...(replaceN=replacebyN)
+    /// </summary>
     [TcmTemplateTitle("Replace special character")]
+    [TcmTemplateParameterSchema("resource:Dyndle.Templates.Resources.ReplaceCharacter Parameters.xsd")]
     public class ReplaceCharacter : ITemplate
     {
-        /// <summary>
-        /// Use this template building block to replace any special character from a entire publication
-        /// add a new parameter to your publication metadata name "charactersToReplace"
-        /// provide parameter as (replace1=replaceby1)(replace2=replaceby2)...(replaceN=replacebyN)
-        /// </summary>
-
         private Package _package;
-        private Engine _engine;
-        private Publication _publication;
-        private Component _component;
-
         private readonly TemplatingLogger LOG = TemplatingLogger.GetLogger(typeof(ReplaceCharacter));
-        private static readonly string CHARACTERS_TO_REPLACE = "charactersToReplace";
-
 
         #region DynamicDeliveryTransformer Members
         public void Transform(Engine engine, Package package)
         {
-            _engine = engine;
             _package = package;
-            _component = GetComponent();
-            _publication = GetPublication(_component.Id);
 
-            LOG.Debug($"Trying to run the module for publication: {_publication.Title}");
-            if (GetPublicationMetadataField(_publication) != null)
+            if (_package.GetByName("CharactersToReplace") != null)
             {
                 try
                 {
-                    var dictionaryOfCharacterToReplace = DictionaryOfCharactersToReplace(GetPublicationMetadataField(_publication));
-                    var compressionEnabled = _package.GetByName("compression-enabled");
-                    LOG.Debug($"Compression enabled is {compressionEnabled.ToString().ToLower()}");
+                    var dictionaryOfCharacterToReplace = DictionaryOfCharactersToReplace(_package.GetByName("CharactersToReplace").GetAsString());
+                    var compressionEnabled = _package.GetByName("CompressionEnabled");
+                    LOG.Debug($"Compression enabled is {compressionEnabled?.ToString().ToLower()}");
                     var outputValue = _package.GetValue("Output");
                     LOG.Debug($"Output is {outputValue}");
 
                     if (string.IsNullOrEmpty(outputValue))
                         return;
 
-                    if (compressionEnabled != null && compressionEnabled.GetAsString().Equals("yes", StringComparison.OrdinalIgnoreCase))
+                    if (compressionEnabled != null && compressionEnabled.GetAsString().Equals("true", StringComparison.OrdinalIgnoreCase))
                     {
                         LOG.Debug($"Compression enabled is {compressionEnabled.GetAsString()}");
                         var decompressedOutput = Compressor.Decompress(outputValue);
@@ -82,44 +71,10 @@ namespace Dyndle.Templates
             }
             else
             {
-                LOG.Debug($"Skipping the Replace because it is not configured for this publication.");
+                LOG.Debug($"Skipping the Replace because there were no characters to replace provided in paramaters.");
             }
         }
         #endregion
-
-        private Publication GetPublication(TcmUri componentId)
-        {
-            Publication publication = _engine.GetObject(new TcmUri($"tcm:0-{componentId.PublicationId}-1")) as Publication;
-            if (publication == null)
-            {
-                LOG.Error("no publication found ");
-                return null;
-            }
-            return publication;
-        }
-
-        private Component GetComponent()
-        {
-            Item item = _package.GetByName(Package.ComponentName);
-            if (item == null)
-            {
-                LOG.Error("no component found (is this a page template?)");
-                return null;
-            }
-
-            Component tcmComponent = _engine.GetObject(item) as Component;
-
-            return tcmComponent;
-        }
-
-        private string GetPublicationMetadataField(Publication pub)
-        {
-            ItemFields pubMetaFields = new ItemFields(pub.Metadata, pub.MetadataSchema);
-            LOG.Debug($"Looking in publication metadata for value of field = {CHARACTERS_TO_REPLACE}");
-            TextField field = pubMetaFields[CHARACTERS_TO_REPLACE] as TextField;
-            LOG.Debug($"Configured pub meta value for field = {field.Value}");
-            return field.Value;
-        }
 
         //return the list of dictionary. Dictionary is the "value to replace and key is value to be replaceby"
         //provide parameter as (replace1=replaceby1)(replace2=replaceby2)...(replaceN=replacebyN)
