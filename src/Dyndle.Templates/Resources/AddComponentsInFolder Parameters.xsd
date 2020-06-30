@@ -1,0 +1,33 @@
+﻿<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="DD4T.Templates.Schemas.DynamicDeliveryParameters" xmlns:tcmi="http://www.tridion.com/ContentManager/5.0/Instance" elementFormDefault="qualified" targetNamespace="DD4T.Templates.Schemas.DynamicDeliveryParameters">
+  <xsd:annotation>
+    <xsd:appinfo>
+      <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
+        <tcm:Label ElementName="SchemaRootElementName" Metadata="false">The schema root element name of the components to be added. Will use all components if disabled.</tcm:Label>
+        <tcm:Label ElementName="ComponentTemplate" Metadata="false">Tcm Id of the component template to use for the components added. </tcm:Label>
+        <tcm:Label ElementName="LinkLevel" Metadata="false">Link level for component linking on added components. Default is 1.</tcm:Label>
+      </tcm:Labels>
+    </xsd:appinfo>
+  </xsd:annotation>
+  <xsd:import namespace="http://www.tridion.com/ContentManager/5.0/Instance" schemaLocation="cm_xml_inst.xsd"></xsd:import>
+  <xsd:element name="Parameters">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="SchemaRootElementName" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="ComponentTemplate" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+        <xsd:element name="LinkLevel" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
