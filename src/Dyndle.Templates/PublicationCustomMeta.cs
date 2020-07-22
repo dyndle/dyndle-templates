@@ -94,8 +94,6 @@ namespace Dyndle.Templates
             var filter = new PublicationsFilter(publication.Session); 
             var publications = publication.Session.GetList(filter);
 
-            Log.Info(publications.OuterXml);
-
             Dynamic.Component c = (Dynamic.Component)DD4TUtil.CreateComponent(PublicationMetaComponentTitle, PublicationMetaRootElementName, "Sitemap", page.Publication.Id, page.OwningPublication.Id);
             Dynamic.ComponentTemplate ct = (Dynamic.ComponentTemplate)DD4TUtil.CreateComponentTemplate(PublicationMetaComponentTemplateTitle, "Sitemap", PublicationMetaComponentViewName, page.Publication.Id, page.OwningPublication.Id);
             Dynamic.ComponentPresentation cp = (Dynamic.ComponentPresentation)DD4TUtil.CreateComponentPresentation(c, ct);
@@ -113,16 +111,26 @@ namespace Dyndle.Templates
 
                 if (!string.IsNullOrEmpty(meta?.InnerXml))
                 {
+                    var publicationMeta = new List<Dynamic.FieldSet>();
+                    var embeddedField = new Dynamic.FieldSet();
+
                     foreach (XmlNode field in meta.ChildNodes)
                     {
-                        Log.Debug(field.Name + " - " + field.InnerText);
-                        cp.Component.Fields.Add($"({pub.Attributes["ID"].Value}) - {field.Name}", new Dynamic.Field()
-                        {
+                        embeddedField.Add(field.Name, new Dynamic.Field {
                             Name = field.Name,
-                            FieldType = Dynamic.FieldType.Text,
-                            Values = new List<string>() { field.Value }
+                            Values = new List<string>() { field.InnerText }
                         });
                     }
+
+                    publicationMeta.Add(embeddedField);
+
+                    cp.Component.Fields.Add($"{pub.Attributes["ID"].Value}", new Dynamic.Field()
+                    {
+                        Name = "PublicationId",
+                        FieldType = Dynamic.FieldType.Text,
+                        Values = new List<string>() { pub.Attributes["ID"].Value },
+                        EmbeddedValues = publicationMeta   
+                    });
                 }
             }
         }
