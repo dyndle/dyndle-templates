@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="CategoryTitleToIdLabelMapping.cs" />
     <Compile Include="PreviewPage.cs" />
+    <Compile Include="PublicationCustomMeta.cs" />
     <Compile Include="PublicationMetadataLabelMapping.cs" />
     <Compile Include="ReplaceCharacter.cs" />
     <Compile Include="CopyComponentFieldToPage.cs" />
