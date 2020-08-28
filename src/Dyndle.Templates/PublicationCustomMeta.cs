@@ -17,6 +17,11 @@ using System.Web.UI.WebControls;
 
 namespace Dyndle.Templates
 {
+    // To do:
+    // - Visible names in Tridion should have spaces (see other TBBs for examples)
+    // - DEFAULT_PUBLICATIONMETA_SCHEMA_TITLE = "Sitemap" is incorrect of course
+    // - Add a parameter schema (in Resources folder, see examples there and don't forget to mark it as an embedded resource and reference it in a TcmTemplateParameterSchema attribute)
+    // - Upload everything to 100 Schemas/Building Blocks/System/Templates/Dyndle, and make sure the page template and publication metadata schema are in there too (because we export from there)
     public class PublicationCustomMeta : BasePageTemplate
     {
         public static readonly string DEFAULT_PUBLICATIONMETA_COMPONENT_TITLE = "PublicationMeta";
