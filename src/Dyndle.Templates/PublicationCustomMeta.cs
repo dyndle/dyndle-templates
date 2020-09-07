@@ -18,10 +18,12 @@ using System.Web.UI.WebControls;
 namespace Dyndle.Templates
 {
     // To do:
-    // - Visible names in Tridion should have spaces (see other TBBs for examples)
-    // - DEFAULT_PUBLICATIONMETA_SCHEMA_TITLE = "Sitemap" is incorrect of course
-    // - Add a parameter schema (in Resources folder, see examples there and don't forget to mark it as an embedded resource and reference it in a TcmTemplateParameterSchema attribute)
+    // x Visible names in Tridion should have spaces (see other TBBs for examples)
+    // x DEFAULT_PUBLICATIONMETA_SCHEMA_TITLE = "Sitemap" is incorrect of course
+    // x Add a parameter schema (in Resources folder, see examples there and don't forget to mark it as an embedded resource and reference it in a TcmTemplateParameterSchema attribute)
     // - Upload everything to 100 Schemas/Building Blocks/System/Templates/Dyndle, and make sure the page template and publication metadata schema are in there too (because we export from there)
+    [TcmTemplateTitle("Publication custom metadata")]
+    [TcmTemplateParameterSchema("resource:Dyndle.Templates.Resources.PublicationCustomMeta Parameters.xsd")]
     public class PublicationCustomMeta : BasePageTemplate
     {
         public static readonly string DEFAULT_PUBLICATIONMETA_COMPONENT_TITLE = "PublicationMeta";
@@ -32,7 +34,7 @@ namespace Dyndle.Templates
 
         public static readonly string DEFAULT_PUBLICATIONMETA_ROOT_ELEMENT_NAME = "publicationMeta";
 
-        public static readonly string DEFAULT_PUBLICATIONMETA_SCHEMA_TITLE = "Sitemap";
+        public static readonly string DEFAULT_PUBLICATIONMETA_SCHEMA_TITLE = "Publication Meta";
 
         public PublicationCustomMeta() : base(TemplatingLogger.GetLogger(typeof(PublicationCustomMeta)))
         {
@@ -99,8 +101,8 @@ namespace Dyndle.Templates
             var filter = new PublicationsFilter(publication.Session); 
             var publications = publication.Session.GetList(filter);
 
-            Dynamic.Component c = (Dynamic.Component)DD4TUtil.CreateComponent(PublicationMetaComponentTitle, PublicationMetaRootElementName, "Sitemap", page.Publication.Id, page.OwningPublication.Id);
-            Dynamic.ComponentTemplate ct = (Dynamic.ComponentTemplate)DD4TUtil.CreateComponentTemplate(PublicationMetaComponentTemplateTitle, "Sitemap", PublicationMetaComponentViewName, page.Publication.Id, page.OwningPublication.Id);
+            Dynamic.Component c = (Dynamic.Component)DD4TUtil.CreateComponent(PublicationMetaComponentTitle, PublicationMetaRootElementName, PublicationMetaSchemaTitle, page.Publication.Id, page.OwningPublication.Id);
+            Dynamic.ComponentTemplate ct = (Dynamic.ComponentTemplate)DD4TUtil.CreateComponentTemplate(PublicationMetaComponentTemplateTitle, PublicationMetaSchemaTitle, PublicationMetaComponentViewName, page.Publication.Id, page.OwningPublication.Id);
             Dynamic.ComponentPresentation cp = (Dynamic.ComponentPresentation)DD4TUtil.CreateComponentPresentation(c, ct);
 
             if (page.ComponentPresentations == null || page.ComponentPresentations.Count == 0)
