@@ -11,13 +11,10 @@ using Dynamic = DD4T.ContentModel;
 namespace Dyndle.Templates
 {
     [TcmTemplateTitle("Add all components in (sub)folders to DD4T page")]
+    [TcmTemplateParameterSchema("resource:Dyndle.Templates.Resources.AddComponentsInFolder Parameters.xsd")]
     public class AddComponentsInFolder : BasePageTemplate
     {
         private readonly TemplatingLogger LOG = TemplatingLogger.GetLogger(typeof (AddComponentsInFolder));
-
-        private static string PARAM_SCHEMA_ROOTELEM_NAME = "schemaRootName";
-        private static string PARAM_SCHEMA_CT = "ct";
-        private static string PARAM_SCHEMA_LINKLEVEL = "linkLevel";
 
         private string _schemaRootElem;
         private int _linkLevel = 1;
@@ -25,15 +22,15 @@ namespace Dyndle.Templates
 
         private void Init()
         {
-            _schemaRootElem = Package.GetValue(PARAM_SCHEMA_ROOTELEM_NAME) ?? string.Empty;
-            string level = Package.GetValue(PARAM_SCHEMA_LINKLEVEL) ?? string.Empty;
+            _schemaRootElem = Package.GetByName("SchemaRootElementName")?.GetAsString() ?? string.Empty;
+            string level = Package.GetByName("LinkLevel")?.GetAsString() ?? string.Empty;
             if (Int32.TryParse(level, out int linkLevel))
             {
                 _linkLevel = linkLevel;
             }
 
             // get CT to use
-            string ctId = Package.GetValue(PARAM_SCHEMA_CT) ?? string.Empty;
+            string ctId = Package.GetByName("ComponentTemplate")?.GetAsString() ?? string.Empty;
             if (!string.IsNullOrEmpty(ctId))
             {
                 _ct = new Dynamic.ComponentTemplate();

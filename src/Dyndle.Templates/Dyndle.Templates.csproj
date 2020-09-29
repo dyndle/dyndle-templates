@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="CategoryTitleToIdLabelMapping.cs" />
     <Compile Include="PreviewPage.cs" />
+    <Compile Include="PublicationCustomMeta.cs" />
     <Compile Include="PublicationMetadataLabelMapping.cs" />
     <Compile Include="ReplaceCharacter.cs" />
     <Compile Include="CopyComponentFieldToPage.cs" />
@@ -156,6 +157,15 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <EmbeddedResource Include="Resources\Preview Parameters.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AddComponentsInFolder Parameters.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\ReplaceCharacter Parameters.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\PublicationCustomMeta Parameters.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
