@@ -116,11 +116,15 @@ namespace Dyndle.Templates
                     var publicationMeta = new List<Dynamic.FieldSet>();
                     var embeddedField = new Dynamic.FieldSet();
 
-                    foreach (XmlNode field in meta.SelectNodes("*"))
+                    var fields = meta.SelectNodes("*").Cast<XmlNode>();
+                    foreach (var grouping in fields.GroupBy(f => f.LocalName))
                     {
-                        embeddedField.Add(field.Name, new Dynamic.Field {
+                        var field = grouping.FirstOrDefault();
+                        var values = grouping.Select(f => f.InnerText).ToList();
+                        embeddedField.Add(field.Name, new Dynamic.Field
+                        {
                             Name = field.Name,
-                            Values = new List<string>() { field.InnerText }
+                            Values = values
                         });
                     }
 
