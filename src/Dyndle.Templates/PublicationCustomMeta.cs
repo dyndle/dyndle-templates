@@ -119,11 +119,11 @@ namespace Dyndle.Templates
                     var fields = meta.SelectNodes("*").Cast<XmlNode>();
                     foreach (var grouping in fields.GroupBy(f => f.LocalName))
                     {
-                        var field = grouping.FirstOrDefault();
+                        var fieldName = grouping.Key;
                         var values = grouping.Select(f => f.InnerText).ToList();
-                        embeddedField.Add(field.Name, new Dynamic.Field
+                        embeddedField.Add(fieldName, new Dynamic.Field
                         {
-                            Name = field.Name,
+                            Name = fieldName,
                             Values = values
                         });
                     }
