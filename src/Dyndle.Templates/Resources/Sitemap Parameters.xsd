@@ -2,7 +2,9 @@
   <xsd:annotation>
     <xsd:appinfo>
       <tcm:Labels xmlns:tcm="http://www.tridion.com/ContentManager/5.0">
-        <tcm:Label ElementName="BaseUrl" Metadata="false">URL of the root of the web site</tcm:Label>
+        <tcm:Label ElementName="UseAbsoluteUrls" Metadata="false">Use absolute URLs</tcm:Label>
+        <tcm:Label ElementName="IndexFilename" Metadata="false">Filename of index pages (defaults to 'index')</tcm:Label>
+        <tcm:Label ElementName="BaseUrl" Metadata="false">Override the URL of the root of the web site</tcm:Label>
         <tcm:Label ElementName="SitemapComponentTitle" Metadata="false">Title of the Sitemap component which will be placed on the page</tcm:Label>
         <tcm:Label ElementName="SitemapSchemaTitle" Metadata="false">Title of the Sitemap schema</tcm:Label>
         <tcm:Label ElementName="SitemapRootElementName" Metadata="false">Root element name of the Sitemap schema</tcm:Label>
@@ -18,6 +20,24 @@
   <xsd:element name="Parameters">
     <xsd:complexType>
       <xsd:sequence>
+        <xsd:element name="UseAbsoluteUrls" minOccurs="0" maxOccurs="1">
+          <xsd:annotation>
+            <xsd:appinfo>
+              <tcm:listtype xmlns:tcm="http://www.tridion.com/ContentManager/5.0">checkbox</tcm:listtype>
+              <tcm:Size xmlns:tcm="http://www.tridion.com/ContentManager/5.0">1</tcm:Size>
+            </xsd:appinfo>
+          </xsd:annotation>
+          <xsd:simpleType>
+            <xsd:restriction base="xsd:normalizedString">
+              <xsd:enumeration value="yes"></xsd:enumeration>
+            </xsd:restriction>
+          </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="IndexFilename" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
+          <xsd:annotation>
+            <xsd:appinfo/>
+          </xsd:annotation>
+        </xsd:element>
         <xsd:element name="BaseUrl" minOccurs="0" maxOccurs="1" type="xsd:normalizedString">
           <xsd:annotation>
             <xsd:appinfo/>

@@ -36,6 +36,8 @@ namespace Dyndle.Templates
 
         public static readonly string DEFAULT_SITEMAP_SCHEMA_TITLE = "Sitemap";
 
+        public static readonly string DEFAULT_INDEX_FILENAME = "index";
+
         public static readonly bool FILTER_BY_NUMERIC_PREFIX = true;
 
         public static readonly bool FILTER_BY_NUMERIC_PREFIX_ONLY_ON_LEVEL_1 = true;
@@ -44,6 +46,9 @@ namespace Dyndle.Templates
 
         public static readonly int DEFAULT_LINK_LEVEL = 2;
 
+        public static readonly bool DEFAULT_USE_ABSOLUTE_URLS = false;
+
+        
         private Dynamic.Schema embeddedSchema = null;
 
         public Sitemap() : base(TemplatingLogger.GetLogger(typeof(Sitemap)))
@@ -60,6 +65,17 @@ namespace Dyndle.Templates
                 if (baseUrl == null)
                     return "";
                 return baseUrl.GetAsString();
+            }
+        }
+
+        private string IndexFilename
+        {
+            get
+            {
+                Item indexFilename = Package.GetByName("IndexFilename");
+                if (indexFilename == null)
+                    return DEFAULT_INDEX_FILENAME;
+                return indexFilename.GetAsString();
             }
         }
 
@@ -140,6 +156,18 @@ namespace Dyndle.Templates
             }
         }
 
+        private bool UseAbsoluteUrls
+        {
+            get
+            {
+                Item item = Package.GetByName("UseAbsoluteUrls");
+                if (item == null)
+                    return DEFAULT_USE_ABSOLUTE_URLS;
+                var raw = item.GetAsString();
+                return raw.Equals("yes", StringComparison.InvariantCultureIgnoreCase);
+            }
+        }
+
         #region DynamicDeliveryTransformer Members
 
         protected override void TransformPage(Dynamic.Page page)
@@ -214,6 +242,15 @@ namespace Dyndle.Templates
                 FieldType = fieldType
             };
         }
+        private Dynamic.Field CreateField(string fieldName, DateTime fieldValue, DD4T.ContentModel.FieldType fieldType = DD4T.ContentModel.FieldType.Date)
+        {
+            return new DD4T.ContentModel.Field()
+            {
+                Name = fieldName,
+                DateTimeValues = new List<DateTime>() { fieldValue },
+                FieldType = fieldType
+            };
+        }
 
         private Dynamic.FieldSet CreateFieldSet(Page page, string directoryPath)
         {
@@ -224,14 +261,20 @@ namespace Dyndle.Templates
                 Name = "id",
                 FieldType = Dynamic.FieldType.Text,
                 Values = new List<string>() { page.Id }
-            }
-            );
+            });
 
             fieldSet.Add("title", new Dynamic.Field()
             {
                 Name = "title",
                 FieldType = Dynamic.FieldType.Text,
                 Values = new List<string>() { RegexPrefix.Replace(page.Title, "") }
+            });
+
+            fieldSet.Add("visible", new Dynamic.Field()
+            {
+                Name = "visible",
+                FieldType = Dynamic.FieldType.Text,
+                Values = new List<string>() { Convert.ToString(true) }
             });
 
             bool status = FillFieldSet(fieldSet, page, directoryPath);
@@ -244,6 +287,7 @@ namespace Dyndle.Templates
         {
             bool isPublished = false;
             DateTime lastMod = DateTime.MinValue;
+            Uri uri = null;
             if (Engine.PublishingContext.PublicationTarget != null)
             {
                 Log.Debug(string.Format("Found PublicationTarget {0}, checking if page {1} is published to this target", Engine.PublishingContext.PublicationTarget.Title, page.Title));
@@ -254,6 +298,7 @@ namespace Dyndle.Templates
                     {
                         Log.Debug(string.Format("Page was published to target {0} at {1}", publishInfo.PublicationTarget.Title, publishInfo.PublishedAt));
                         lastMod = publishInfo.PublishedAt;
+                        uri = page.GetPublishUrl(publishInfo.TargetType);
                         isPublished = true;
                     }
                 }
@@ -271,7 +316,14 @@ namespace Dyndle.Templates
                         isPublished = true;
                     }
                 }
+                Log.Debug($"BaseUrl: {BaseUrl}, PublicationUrl: {((Publication)page.ContextRepository).PublicationUrl}, directoryPath: {directoryPath}, filename: {page.GetFileNameWithExtension()}");
+                var calculatedUrl = (string.IsNullOrEmpty(BaseUrl) ? "http://localhost" : BaseUrl) + ((Publication)page.ContextRepository).PublicationUrl + "/" + directoryPath + "/" + page.GetFileNameWithExtension();
+                Log.Debug($"Calculated url: {calculatedUrl}");
+                var normalizedUrl = calculatedUrl.NormalizeUrl();
+                Log.Debug($"Normalized url: {normalizedUrl}");
+                uri = new Uri (normalizedUrl);
             }
+
 
             if (!isPublished)
             {
@@ -279,35 +331,33 @@ namespace Dyndle.Templates
                 return false;
             }
 
-            string calculatedUrl = BaseUrl + (((Publication)page.ContextRepository).PublicationUrl + "/" + directoryPath + "/" + page.GetFileNameWithExtension()).NormalizeUrl();
 
             if (fieldSet.ContainsKey(FieldNames.url.ToString()))
             {
                 Log.Debug($"found {FieldNames.url.ToString()} already, removing it now");
                 fieldSet.Remove(FieldNames.url.ToString());
             }
+            fieldSet.Add(FieldNames.lastMod.ToString(), CreateField(FieldNames.lastMod.ToString(), lastMod));
+            Log.Debug(string.Format("Added field {0} with default value {1}", FieldNames.lastMod.ToString(), lastMod));
 
+            string url;
+            if (UseAbsoluteUrls && !string.IsNullOrEmpty(BaseUrl))
+            {
+                uri = new Uri($"{BaseUrl}{uri.LocalPath}".NormalizeUrl());
+                Log.Debug("you want absolute URLs and you have configured your own base url, I have converted the url to {uri}");
+            }
+
+            Log.Debug($"Page metadata: {page.Metadata}");
             if (page.Metadata == null)
             {
                 // page has no metadata, no need to go looking any further
-                // just set the url, last modified date and the defaults and leave
-                fieldSet.Add(FieldNames.url.ToString(), new Dynamic.Field()
-                {
-                    FieldType = Dynamic.FieldType.Text,
-                    Name = FieldNames.url.ToString(),
-                    Values = new List<string>() { calculatedUrl }
-                });
+                // just set the url and the various defaults and return              
 
-                fieldSet.Add(FieldNames.lastMod.ToString(), new Dynamic.Field()
-                {
-                    FieldType = Dynamic.FieldType.Date,
-                    Name = FieldNames.lastMod.ToString(),
-                    DateTimeValues = new List<DateTime>() { lastMod }
-                });
-                Log.Debug(string.Format("Added field {0} with value {1}", FieldNames.lastMod.ToString(), lastMod));
+                fieldSet.Add(FieldNames.url.ToString(), CreateField(FieldNames.url.ToString(), UseAbsoluteUrls ? uri.AbsoluteUri : uri.LocalPath));
+                Log.Debug(string.Format("Added field {0} with value {1}", FieldNames.url.ToString(), UseAbsoluteUrls ? uri.AbsoluteUri : uri.LocalPath));
 
                 fieldSet.Add(FieldNames.changeFrequency.ToString(), CreateField(FieldNames.changeFrequency.ToString(), DEFAULT_CHANGE_FREQUENCY));
-                Log.Debug(string.Format("Added field {0} with default value {1}", FieldNames.changeFrequency.ToString(), DEFAULT_CHANGE_FREQUENCY));
+                Log.Debug(string.Format("Added field {0} with value {1}", FieldNames.changeFrequency.ToString(), DEFAULT_CHANGE_FREQUENCY));
 
                 fieldSet.Add(FieldNames.priority.ToString(), CreateField(FieldNames.priority.ToString(), DEFAULT_PRIORITY));
                 Log.Debug(string.Format("Added field {0} with value {1}", FieldNames.priority.ToString(), DEFAULT_PRIORITY));
@@ -319,17 +369,9 @@ namespace Dyndle.Templates
             }
             ItemFields metadataFields = new ItemFields(page.Metadata, page.MetadataSchema);
 
-            var externalUrl = GetOrCreateField(metadataFields, FieldNames.url.ToString(), calculatedUrl);
-            fieldSet.Add(FieldNames.url.ToString(), externalUrl);
-            Log.Debug(string.Format("Added field {0} with value {1}", externalUrl.Name, externalUrl.Value));
-
-            fieldSet.Add(FieldNames.lastMod.ToString(), new Dynamic.Field()
-            {
-                FieldType = Dynamic.FieldType.Date,
-                Name = FieldNames.lastMod.ToString(),
-                DateTimeValues = new List<DateTime>() { lastMod }
-            });
-            Log.Debug(string.Format("Added field {0} with value {1}", FieldNames.lastMod.ToString(), lastMod));
+            var urlField = GetOrCreateField(metadataFields, FieldNames.url.ToString(), UseAbsoluteUrls ? uri.AbsoluteUri : uri.LocalPath);
+            fieldSet.Add(FieldNames.url.ToString(), urlField);
+            Log.Debug(string.Format("Added field {0} with value {1}", urlField.Name, urlField.Value));
 
             var changeFreq = GetOrCreateField(metadataFields, FieldNames.changeFrequency.ToString(), DEFAULT_CHANGE_FREQUENCY);
             fieldSet.Add(FieldNames.changeFrequency.ToString(), changeFreq);
@@ -397,7 +439,7 @@ namespace Dyndle.Templates
                 Page childPage = child as Page;
                 if (childPage != null)
                 {
-                    if (childPage.FileName == "index")
+                    if (childPage.FileName == IndexFilename)
                     {
                         Log.Debug(string.Format("found index page {0} ({1}), using it to enrich the parent node in the sitemap ({2})", childPage.Title, childPage.Id, structureGroup.Title));
                         hasPublishedPages = hasPublishedPages | FillFieldSet(currentFieldSet, childPage, directoryPath);
@@ -437,14 +479,7 @@ namespace Dyndle.Templates
                         Values = new List<string>() { RegexPrefix.Replace(child.Title, "") }
                     }
                     );
-                    string calculatedUrl = BaseUrl + (((Publication)child.ContextRepository).PublicationUrl + "/" + directoryPath).NormalizeUrl();
-                    childFieldSet.Add("url", new Dynamic.Field()
-                    {
-                        Name = "url",
-                        FieldType = Dynamic.FieldType.Text,
-                        Values = new List<string>() { calculatedUrl } 
-                    }
-                    );
+                 
                     childFieldSet.Add("visible", new Dynamic.Field()
                     {
                         Name = "visible",
