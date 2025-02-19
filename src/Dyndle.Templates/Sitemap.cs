@@ -340,7 +340,6 @@ namespace Dyndle.Templates
             fieldSet.Add(FieldNames.lastMod.ToString(), CreateField(FieldNames.lastMod.ToString(), lastMod));
             Log.Debug(string.Format("Added field {0} with default value {1}", FieldNames.lastMod.ToString(), lastMod));
 
-            string url;
             if (UseAbsoluteUrls && !string.IsNullOrEmpty(BaseUrl))
             {
                 uri = new Uri($"{BaseUrl}{uri.LocalPath}".NormalizeUrl());
