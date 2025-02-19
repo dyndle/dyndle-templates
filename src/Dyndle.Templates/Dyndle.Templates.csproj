@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\ILMerge.3.0.40\build\ILMerge.props" Condition="Exists('..\packages\ILMerge.3.0.40\build\ILMerge.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,9 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dyndle.Templates</RootNamespace>
     <AssemblyName>Dyndle.Templates</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,23 +34,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DD4T.ContentModel, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD4T.Model.2.5.0\lib\net45\DD4T.ContentModel.dll</HintPath>
+    <Reference Include="DD4T.ContentModel, Version=2.6.1.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD4T.Model.2.6.1\lib\net45\DD4T.ContentModel.dll</HintPath>
     </Reference>
-    <Reference Include="DD4T.ContentModel.Contracts, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD4T.Model.2.5.0\lib\net45\DD4T.ContentModel.Contracts.dll</HintPath>
+    <Reference Include="DD4T.ContentModel.Contracts, Version=2.6.1.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD4T.Model.2.6.1\lib\net45\DD4T.ContentModel.Contracts.dll</HintPath>
     </Reference>
-    <Reference Include="DD4T.ContentModel.XmlSerializers, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD4T.Model.2.5.0\lib\net45\DD4T.ContentModel.XmlSerializers.dll</HintPath>
+    <Reference Include="DD4T.ContentModel.XmlSerializers, Version=2.6.1.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD4T.Model.2.6.1\lib\net45\DD4T.ContentModel.XmlSerializers.dll</HintPath>
     </Reference>
-    <Reference Include="DD4T.Serialization, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD4T.Model.2.5.0\lib\net45\DD4T.Serialization.dll</HintPath>
+    <Reference Include="DD4T.Serialization, Version=2.6.1.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD4T.Model.2.6.1\lib\net45\DD4T.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="DD4T.Templates.Base, Version=2.5.0.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
-      <HintPath>..\packages\DD4T.Templates.Base.2.5.0-legacy\lib\net45\DD4T.Templates.Base.dll</HintPath>
+    <Reference Include="DD4T.Templates.Base, Version=2.6.0.0, Culture=neutral, PublicKeyToken=4450e3c7f68bf872, processorArchitecture=MSIL">
+      <HintPath>..\packages\DD4T.Templates.Base.2.6.0\lib\net48\DD4T.Templates.Base.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,38 +61,44 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tridion.Common, Version=8.1.0.150, Culture=neutral, PublicKeyToken=349a39f202fa9b53, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.Common.dll</HintPath>
+    <Reference Include="Tridion.Common, Version=9.5.0.0, Culture=neutral, PublicKeyToken=349a39f202fa9b53, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager, Version=8.1.0.1287, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ContentManager.dll</HintPath>
+    <Reference Include="Tridion.ContentManager, Version=9.5.0.0, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ContentManager.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Common, Version=8.1.0.1287, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ContentManager.Common.dll</HintPath>
+    <Reference Include="Tridion.ContentManager.Common, Version=9.5.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ContentManager.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Publishing, Version=8.1.0.1287, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ContentManager.Publishing.dll</HintPath>
+    <Reference Include="Tridion.ContentManager.Publishing, Version=9.5.0.0, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ContentManager.Publishing.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Queuing, Version=8.1.0.1287, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ContentManager.Queuing.dll</HintPath>
+    <Reference Include="Tridion.ContentManager.Queuing, Version=9.5.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ContentManager.Queuing.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.TemplateTypes, Version=8.1.0.1287, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ContentManager.TemplateTypes.dll</HintPath>
+    <Reference Include="Tridion.ContentManager.TemplateTypes, Version=9.5.0.0, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ContentManager.TemplateTypes.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.Templating, Version=8.1.0.1287, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ContentManager.Templating.dll</HintPath>
+    <Reference Include="Tridion.ContentManager.Templating, Version=9.5.0.0, Culture=neutral, PublicKeyToken=360aac4d3354074b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ContentManager.Templating.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ContentManager.TypeRegistration, Version=8.1.0.1287, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ContentManager.TypeRegistration.dll</HintPath>
+    <Reference Include="Tridion.ContentManager.TypeRegistration, Version=9.5.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ContentManager.TypeRegistration.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.ExternalContentLibrary, Version=8.1.0.211, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ExternalContentLibrary.dll</HintPath>
+    <Reference Include="Tridion.ExternalContentLibrary, Version=9.5.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ExternalContentLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ExternalContentLibrary.Contract.V3, Version=9.5.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ExternalContentLibrary.Contract.V3.dll</HintPath>
+    </Reference>
+    <Reference Include="Tridion.ExternalContentLibrary.Provider.V3.Base, Version=9.5.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ExternalContentLibrary.Provider.V3.Base.dll</HintPath>
     </Reference>
     <Reference Include="Tridion.ExternalContentLibrary.V2, Version=1.1.0.90, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.ExternalContentLibrary.V2.dll</HintPath>
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.ExternalContentLibrary.V2.dll</HintPath>
     </Reference>
-    <Reference Include="Tridion.Logging, Version=8.1.0.150, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\SDLWeb8-CM.8.1.0.1312\lib\Tridion.Logging.dll</HintPath>
+    <Reference Include="Tridion.Logging, Version=9.5.0.0, Culture=neutral, PublicKeyToken=ddfc895746e5ee6b, processorArchitecture=MSIL">
+      <HintPath>..\packages\SDLTridionSites9.5-CM.9.5.1\lib\Tridion.Logging.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -155,7 +164,6 @@
     <EmbeddedResource Include="Resources\CopyComponentFieldToPage Parameters.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="packages.config" />
     <EmbeddedResource Include="Resources\Preview Parameters.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -168,6 +176,7 @@
     <EmbeddedResource Include="Resources\PublicationCustomMeta Parameters.xsd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -195,7 +204,7 @@
     <PropertyGroup>
       <OutputAssembly>$(TargetDir)$(ProjectName).merged.dll</OutputAssembly>
       <CopyDestination>$(SolutionDir)tools\template-installer\files</CopyDestination>
-      <Merger>$(SolutionDir)packages\ILMerge.2.14.1208\tools\ILMerge.exe</Merger>
+      <Merger>$(SolutionDir)packages\ILMerge.3.0.40\tools\net452\ILMerge.exe</Merger>
     </PropertyGroup>
     <Message Text="MERGING: @(MergeAssemblies->'%(Filename)') into $(OutputAssembly)" Importance="High" />
     <Exec Command="$(Merger) /out:&quot;$(OutputAssembly)&quot; @(MergeAssemblies->'&quot;%(FullPath)&quot;', ' ')" />
@@ -203,5 +212,11 @@
     <MakeDir Directories="$(CopyDestination)" Condition="!Exists('$(CopyDestination')" />
     <Message Text="Copying $(OutputAssembly) to $(CopyDestination)" Importance="High" />
     <Exec Command="copy $(OutputAssembly) $(CopyDestination)" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\ILMerge.3.0.40\build\ILMerge.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILMerge.3.0.40\build\ILMerge.props'))" />
   </Target>
 </Project>
